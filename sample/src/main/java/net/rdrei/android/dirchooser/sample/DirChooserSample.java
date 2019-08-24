@@ -24,43 +24,36 @@ public class DirChooserSample extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        mDirectoryTextView = (TextView) findViewById(R.id.textDirectory);
+        mDirectoryTextView = findViewById(R.id.textDirectory);
 
         // Set up click handler for "Choose Directory" button
         findViewById(R.id.btnChoose)
-                .setOnClickListener(new OnClickListener() {
+                .setOnClickListener(v -> {
+                    final Intent chooserIntent = new Intent(
+                            DirChooserSample.this,
+                            DirectoryChooserActivity.class);
 
-                    @Override
-                    public void onClick(View v) {
-                        final Intent chooserIntent = new Intent(
-                                DirChooserSample.this,
-                                DirectoryChooserActivity.class);
+                    final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
+                            .newDirectoryName("DirChooserSample")
+                            .allowReadOnlyDirectory(true)
+                            .allowNewDirectoryNameModification(true)
+                            .build();
 
-                        final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
-                                .newDirectoryName("DirChooserSample")
-                                .allowReadOnlyDirectory(true)
-                                .allowNewDirectoryNameModification(true)
-                                .build();
+                    chooserIntent.putExtra(
+                            DirectoryChooserActivity.EXTRA_CONFIG,
+                            config);
 
-                        chooserIntent.putExtra(
-                                DirectoryChooserActivity.EXTRA_CONFIG,
-                                config);
-
-                        startActivityForResult(chooserIntent, REQUEST_DIRECTORY);
-                    }
+                    startActivityForResult(chooserIntent, REQUEST_DIRECTORY);
                 });
 
         findViewById(R.id.btnChange)
-                .setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        final Intent fragmentSampleIntent = new Intent(
-                                DirChooserSample.this,
-                                DirChooserFragmentSample.class
-                        );
+                .setOnClickListener(v -> {
+                    final Intent fragmentSampleIntent = new Intent(
+                            DirChooserSample.this,
+                            DirChooserFragmentSample.class
+                    );
 
-                        startActivity(fragmentSampleIntent);
-                    }
+                    startActivity(fragmentSampleIntent);
                 });
     }
 

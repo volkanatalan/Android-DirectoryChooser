@@ -5,18 +5,36 @@ buildscript {
         maven {
             url 'https://oss.sonatype.org/content/repositories/snapshots/'
         }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'com.android.tools.build:gradle:3.4.2'
     }
 }
 
 subprojects {
     repositories {
+        jcenter()
         mavenCentral()
         maven {
             url 'https://jitpack.io/'
         }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+    }
+}
+
+repositories {
+    jcenter()
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
     }
 }

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.View;
 import android.widget.TextView;
 
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
@@ -25,15 +24,10 @@ public class DirChooserFragmentSample extends Activity implements DirectoryChoos
                 .build();
         mDialog = DirectoryChooserFragment.newInstance(config);
 
-        mDirectoryTextView = (TextView) findViewById(R.id.textDirectory);
+        mDirectoryTextView = findViewById(R.id.textDirectory);
 
         findViewById(R.id.btnChoose)
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mDialog.show(getFragmentManager(), null);
-                    }
-                });
+                .setOnClickListener(v -> mDialog.show(getFragmentManager(), null));
     }
 
     @Override
